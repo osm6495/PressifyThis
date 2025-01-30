@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Hot Off The Press</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="/src/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body x-data="content">
+    <div class="flag">
+      <p class="p1">
+        Text straight from your news&nbsp;source. <a
+          href="https://github.com/osm6495"
+        >GitHub</a>
+      </p>
+      <h1 class="title">Hot&nbsp;Off The&nbsp;Press</h1>
+      <h3 class="h3">About</h3>
+      <p class="p2">
+        The text content of the news source is accessed and formatted like this
+        directly in your browser, without being accessed or modified by any
+        servers.
+      </p>
+    </div>
+    <div class="rule" x-data="theme" x-init="init()">
+      <hr />
+      <div class="rule-content">
+        <p class="date" x-text="date"></p>
+        <div class="input-group">
+          <input
+            type="text"
+            placeholder="Input your source URL here"
+            x-model="source"
+          />
+          <button @click="getContent()">Get&nbsp;News</button>
+        </div>
+        <button
+          class="mode"
+          @click="toggleTheme()"
+          x-text="buttonText"
+        >
+          Dark Mode
+        </button>
+      </div>
+      <hr />
+    </div>
+    <div class="content">
+      <h2 x-text="title"></h2>
+      <p x-html="text"></p>
+    </div>
+  </body>
+</html>

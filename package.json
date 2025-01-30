@@ -1,0 +1,21 @@
+{
+  "name": "thepress",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.0.5"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.5.0",
+    "alpinejs": "^3.14.8",
+    "buffer": "^6.0.3",
+    "dompurify": "^3.2.3",
+    "events": "^3.3.0"
+  }
+}

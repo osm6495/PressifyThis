@@ -1,0 +1,248 @@
+/* Themes */
+:root {
+  --bg-color: #f5f5f5;
+  --input-bg: #ffffff;
+  --text-color: #000000;
+  --input-color: #000000;
+}
+
+:root[data-theme="dark"] {
+  --bg-color: #1a1c20;
+  --input-bg: #ffffffe7;
+  --text-color: #ffffffe7;
+  --input-color: #000000;
+}
+
+#theme-toggle {
+  display: none;
+}
+
+a {
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+body {
+  font-family: "Crimson Pro", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1, h2, h3 {
+  font-family: "Libre Bodoni", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* FLAG SECTION */
+.flag {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  max-width: 1200px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* Left Column */
+.p1 {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  border: 2px solid var(--text-color);
+  transition: border 0.3s;
+  padding: 10px;
+}
+
+/* Center Column (Title) */
+.title {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+}
+
+.h3 {
+  grid-column: 3;
+  grid-row: 1;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+.p2 {
+  margin: 0;
+  padding: 0;
+  grid-column: 3;
+  grid-row: 2;
+}
+
+/* RULE SECTION */
+.rule {
+  width: 80%;
+  max-width: 1200px;
+  margin: 10px auto;
+}
+
+.rule hr {
+  border: none;
+  border-top: 1px solid var(--text-color);
+  transition: boder-top 0.3s;
+}
+
+.date {
+  grid-column: 1;
+  text-align: center;
+}
+
+.rule-content {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
+}
+
+.mode {
+  grid-column: 3;
+  width: 30%;
+  margin-left: 35%;
+  font-size: medium;
+}
+
+.input-group {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.rule-content input {
+  color: var(--input-color);
+  background-color: var(--input-bg);
+  width: 300px;
+  padding: 5px;
+  border: 1px solid var(--text-color);
+  transition: border 0.3s;
+}
+
+.rule-content button {
+  background-color: var(--text-color);
+  transition: background-color 0.3s;
+  color: var(--bg-color);
+  transition: color 0.3s;
+  padding: 5px 15px;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* CONTENT SECTION */
+.content {
+  width: 60%;
+  max-width: 800px;
+  padding: 20px;
+  text-align: justify;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.content h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  /* Hide .p1, .p2, and .h3 in mobile view */
+
+  .p1, .p2, .h3 {
+    display: none;
+  }
+
+  .title {
+    width: 100%;
+    margin-top: 10%;
+  }
+
+  /* Flag section: Adjust title position */
+  .flag {
+    display: flex; /* Make it single-column */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Rule section adjustments */
+  .rule-content {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  /* Date moves above the input group */
+  .date {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Stack input-group and mode button */
+  .input-group {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .input-group input {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .mode {
+    grid-column: 1;
+    grid-row: 3;
+    padding: 0;
+    margin: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 35%;
+    width: 30%;
+    text-align: center;
+  }
+}
