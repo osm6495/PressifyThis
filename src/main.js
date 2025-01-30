@@ -129,8 +129,9 @@ async function getText(url) {
       img.removeAttribute("old-src");
     }
   });
-
   article.content = contentDoc.body.innerHTML;
+
+  // Replace h2 with h3, since the headline will be h2
   article.content = article.content.replaceAll("h2", "h3");
   console.log(article.content);
 
