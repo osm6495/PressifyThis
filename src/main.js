@@ -159,9 +159,19 @@ async function getText(url) {
     // Replace src attribute in images so it doesn't point to localhost
     contentDoc.querySelectorAll("img").forEach((img) => {
       if (img.hasAttribute("old-src")) {
-        console.log(img.getAttribute("old-src"));
         img.setAttribute("src", img.getAttribute("old-src"));
         img.removeAttribute("old-src");
+      }
+    });
+    article.content = contentDoc.body.innerHTML;
+
+    contentDoc.querySelectorAll("a").forEach((a) => {
+      if (a.hasAttribute("href")) {
+        const regex = /https:\/\/archive\.ph\/o\/[^/]+\/(https?:\/\/.+)/;
+        const oldUrl = a.getAttribute("href");
+        const match = oldUrl.match(regex);
+        const url = match ? decodeURIComponent(match[1]) : oldUrl;
+        a.setAttribute("href", url);
       }
     });
     article.content = contentDoc.body.innerHTML;
@@ -178,7 +188,13 @@ async function getText(url) {
     ) {
       let article = {};
       article.content =
-        "No archive was found for this link, and the original source is blocking access.";
+        `No archive was found for this link, and the original source is blocking access. <br>
+        <br>
+        This is a limitation of this site being exclusively run in the browser, although hopefully a rare one. If you are using this site to get around a paywall, you can try searching for an archived
+        version of the article on the <a href=http://web.archive.org/> wayback machine</a> (and consider donating to them while you're there). If you are using this site to get around ads and navigational links, 
+        you can try using the built-in readability mode in Mozilla Firefox or the <a href=https://chromewebstore.google.com/detail/reader-view/fachffmaagpajehggpkaigkacdjhkkdn?hl=en> Reader View Chrome extension</a> if you use Google Chrome.
+        
+        `;
       article.title = "";
       article.source = "";
       article.publishedTime = "";
