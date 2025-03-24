@@ -129,7 +129,7 @@ async function getText(url) {
   const archiveHTML = await archiveRes.text();
   const archiveParser = new DOMParser();
   const archiveDoc = archiveParser.parseFromString(archiveHTML, "text/html");
-  const archiveElem = archiveDoc.querySelector("#row0 a");
+  const archiveElem = archiveDoc.querySelector(".TEXT-BLOCK a");
   let archiveLink;
   if (!archiveElem) {
     archiveLink = sanitizedURL;
