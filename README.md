@@ -46,6 +46,15 @@ cd PressifyThis
 vite run dev
 ```
 
+If this loads a blank page, you can also try:
+
+```bash
+git clone https://github.com/osm6495/PressifyThis
+cd PressifyThis
+vite build
+npx serve ./dist
+```
+
 You can also fork this repo and clone down the fork instead. Once this step is
 complete, click on the link to localhost or copy and paste it into the url bar
 and you will see the site in your browser.

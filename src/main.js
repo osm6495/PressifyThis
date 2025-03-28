@@ -147,7 +147,10 @@ async function getText(url) {
     // Parse the article with mozilla's readability package
     const articleHTML = await articleRes.text();
     const articleParser = new DOMParser();
-    const articleDoc = articleParser.parseFromString(articleHTML, "text/html");
+    const articleDoc = articleParser.parseFromString(
+      articleHTML,
+      "text/html",
+    );
 
     const reader = new Readability(articleDoc);
     const article = reader.parse();
@@ -158,9 +161,32 @@ async function getText(url) {
 
     // Replace src attribute in images so it doesn't point to localhost
     contentDoc.querySelectorAll("img").forEach((img) => {
+      // archive.ph adds an old-src to some images that points to the original source, so prefer that
       if (img.hasAttribute("old-src")) {
         img.setAttribute("src", img.getAttribute("old-src"));
         img.removeAttribute("old-src");
+      }
+    });
+    article.content = contentDoc.body.innerHTML;
+
+    // archive.ph adds an old-srcset to some images that points to the original source, so prefer that
+    const pictures = contentDoc.querySelectorAll("picture");
+    pictures.forEach((picture) => {
+      const sources = picture.querySelectorAll("source");
+      const img = picture.querySelector("img");
+
+      sources.forEach((source) => {
+        if (source.hasAttribute("old-srcset")) {
+          source.setAttribute("srcset", source.getAttribute("old-srcset"));
+          source.removeAttribute("old-srcset");
+        }
+      });
+
+      if (img && img.hasAttribute("src")) {
+        const firstSource = picture.querySelector("source");
+        if (firstSource && firstSource.hasAttribute("srcset")) {
+          img.setAttribute("src", firstSource.getAttribute("srcset"));
+        }
       }
     });
     article.content = contentDoc.body.innerHTML;
@@ -178,7 +204,6 @@ async function getText(url) {
 
     // Replace h2 with h3, since the headline will be h2
     article.content = article.content.replaceAll("h2", "h3");
-    console.log(article.content);
 
     return article;
   } catch (networkError) {
